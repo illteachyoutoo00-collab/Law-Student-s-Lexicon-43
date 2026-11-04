@@ -1,5 +1,5 @@
 {
-  "version": "437de9358dfbeb0a0c50",
+  "version": "a7367c0fcecbd9fdf79b",
   "files": [
     {
       "url": "assets/AssetManifest.bin",
@@ -267,9 +267,9 @@
       "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
     },
     {
-      "url": "flutter_bootstrap.4604a1f297f55d94f42f.js",
+      "url": "flutter_bootstrap.cce8038aa33c8d372e42.js",
       "bytes": 13525,
-      "sha256": "4f691572d8219ffd631aef5a2de3fe7214c8017cd6479bdb60952069c9d5da10"
+      "sha256": "94facb1809aebb7a79d39db3ff78d1b69ce70dd6a070ff8e486ada3d47d23e24"
     },
     {
       "url": "icons/Icon-192.png",
@@ -294,12 +294,12 @@
     {
       "url": "index.html",
       "bytes": 1852,
-      "sha256": "0c77c196e9c10971bfecddd768c877d15466cc430c8342f6018df1c9a9408a3f"
+      "sha256": "c6a677c49f8778d2a6b913d04b2a6f976d5127f5e7b77594e9599580d6bf85c2"
     },
     {
-      "url": "main.2043ace28c09d6460085.dart.js",
-      "bytes": 3000000,
-      "sha256": "2043ace28c09d6460085f0634bbeabb25e71245c741f800cf33a7d6df0da82e1"
+      "url": "main.9f3a52536025c35a2f76.dart.js",
+      "bytes": 3001514,
+      "sha256": "9f3a52536025c35a2f768bf0b216b36eb5da03beb7f6e5cbfef25daf85e24000"
     },
     {
       "url": "manifest.json",
