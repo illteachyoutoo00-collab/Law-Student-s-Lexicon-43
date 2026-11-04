@@ -1,5 +1,5 @@
 {
-  "version": "a7367c0fcecbd9fdf79b",
+  "version": "3ce25a10e6d9e8d4f5fb",
   "files": [
     {
       "url": "assets/AssetManifest.bin",
@@ -267,9 +267,9 @@
       "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
     },
     {
-      "url": "flutter_bootstrap.cce8038aa33c8d372e42.js",
+      "url": "flutter_bootstrap.12cbc20de17ce1b1c2ab.js",
       "bytes": 13525,
-      "sha256": "94facb1809aebb7a79d39db3ff78d1b69ce70dd6a070ff8e486ada3d47d23e24"
+      "sha256": "bf2782ea9f4016bdf08b95a5a39f88c682ca5f177235a01e6a33565aa1b25883"
     },
     {
       "url": "icons/Icon-192.png",
@@ -294,12 +294,12 @@
     {
       "url": "index.html",
       "bytes": 1852,
-      "sha256": "c6a677c49f8778d2a6b913d04b2a6f976d5127f5e7b77594e9599580d6bf85c2"
+      "sha256": "853fe80cb78d364dce2fd572dc824a69b36399c7db611aacd668fd51759462e6"
     },
     {
-      "url": "main.9f3a52536025c35a2f76.dart.js",
-      "bytes": 3001514,
-      "sha256": "9f3a52536025c35a2f768bf0b216b36eb5da03beb7f6e5cbfef25daf85e24000"
+      "url": "main.62805aa4b889dd69886f.dart.js",
+      "bytes": 3002577,
+      "sha256": "62805aa4b889dd69886fe7c9c6ff8b2aa87e2943b0c016bc9624e6edc55be4a6"
     },
     {
       "url": "manifest.json",
@@ -307,14 +307,14 @@
       "sha256": "ccb4af4a6298d2e5b294496dc68818405d4783fa529dfdadbbb25d9664a93bfb"
     },
     {
-      "url": "mongolian_voice.e4a4c5ae529a9157f5b2.js",
-      "bytes": 13018,
-      "sha256": "c867e7a91080912276f86b1c57a8b540a7165fc7b2b82f1daa854dbdfdc185e7"
+      "url": "mongolian_voice.7b5f9f12bf4050439a1b.js",
+      "bytes": 13097,
+      "sha256": "fa5c3673fb7e0cbee3b9900581042b7cef1311e478133a037740c95af13325c4"
     },
     {
       "url": "mongolian_voice.js",
-      "bytes": 12997,
-      "sha256": "ed82d8d13d3ab1232629c1cea9dae78b8d4862e4372165828f33ca0841bcb4e3"
+      "bytes": 13076,
+      "sha256": "e99786f4c3e9ee6f9c77b0fa4f5de3cd86ee848c76b751858124c9f6d3ba319f"
     },
     {
       "url": "mongolian_voice_worker.a1327608c2550c2b342f.js",

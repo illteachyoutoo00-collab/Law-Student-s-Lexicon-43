@@ -2,8 +2,9 @@
 (() => {
   'use strict';
   const base = new URL('.', document.currentScript.src);
-  // Match the native recorder's 0.8-second trailing pause; retain all samples.
-  const RATE=16000, MAX=12, PAUSE=.8, MIN_VOICE=.18, THRESHOLD=.001;
+  // Match MongolianEndpoint in the working APK: 20-ms frames, 0.003 RMS,
+  // 100 ms of active samples and 800 ms trailing quiet. Keep all raw samples.
+  const RATE=16000, MAX=12, PAUSE=.8, MIN_VOICE=.1, THRESHOLD=.003;
   const MODEL_IDLE_MS=60000;
   let current=null, armed=null, last={phase:'idle'}, cached=null, idleTimer=null;
   const now=()=>Date.now();
@@ -90,14 +91,18 @@
     for(let i=0;i<out.length;i++){const p=i*rate/RATE,l=Math.floor(p),f=p-l;out[i]=input[l]*(1-f)+input[Math.min(l+1,input.length-1)]*f;}
     return out;
   }
-  function normalizeQuiet(samples,s) {
-    let energy=0,peak=0;
-    for(const value of samples){energy+=value*value;peak=Math.max(peak,Math.abs(value));}
-    const rms=Math.sqrt(energy/Math.max(1,samples.length));
-    // Uniform gain retains quiet consonants and pauses. Never boost silence,
-    // exceed 6x, or push any sample above 0.85; this cannot recover buried speech.
-    s.inputGain=rms>=.0001&&peak>0?Math.max(1,Math.min(6,.04/rms,.85/peak)):1;
-    if(s.inputGain>1)for(let i=0;i<samples.length;i++)samples[i]*=s.inputGain;
+  function feedEndpoint(s,chunk) {
+    const d=s.endpoint??={size:Math.round(s.rate*.02),count:0,active:0,energy:0,voiced:0,silence:0};
+    for(const sample of chunk){
+      if(Math.abs(sample)>THRESHOLD)d.active++;
+      d.energy+=sample*sample;
+      if(++d.count===d.size){
+        if(Math.sqrt(d.energy/d.size)>THRESHOLD){d.voiced+=d.active;d.silence=0;}
+        else d.silence+=d.size;
+        d.count=0;d.active=0;d.energy=0;
+      }
+    }
+    s.voiced=d.voiced/s.rate;s.silence=d.silence/s.rate;
   }
   async function recognize(status) {
     if(current)throw new Error('A Mongolian recording is already active. Stop it and retry.');
@@ -140,8 +145,7 @@
           const level=peak>=.98?'very loud':s.rms>=THRESHOLD?'sound detected':s.rms>=.0001?'low':'silent';
           status('Listening in Mongolian... Microphone level: '+level+'. Speak, then pause.');
         }
-        const seconds=chunk.length/s.rate;
-        if(s.rms>=THRESHOLD){s.voiced+=seconds;s.silence=0;}else{s.silence+=seconds;}
+        feedEndpoint(s,chunk);
         if(s.voiced>=MIN_VOICE&&s.silence>=PAUSE)finish(s,'pause');
         else if(s.voiced<MIN_VOICE&&s.frames/s.rate>=6)finish(s,'no-speech');
         else if(remaining<=input.length)finish(s,'maximum-duration');
@@ -161,7 +165,8 @@
           : 'The microphone captured sound, but not enough above the speech threshold. Try a normal speaking voice closer to the microphone, or type your search.');
       }
       const samples=resample(s.chunks,s.rate);s.chunks=[];
-      normalizeQuiet(samples,s);
+      // Match the APK: use captured samples without a second software-gain pass.
+      // The browser/device gain-control request is already made at capture time.
       s.phase='loading-model';status('Processing recorded audio on this device... The voice model may take longer to load on first use.');
       const waitingAt=now();
       await bounded(s,s.model.ready,60000,'Mongolian voice model did not load in time. Connect to the internet and retry, or type your search.');
